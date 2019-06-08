@@ -3,13 +3,13 @@ package mods.autodropper.tileentity;
 import mods.autodropper.AutoDropper;
 import mods.autodropper.block.BlockAutoDropper;
 import net.minecraft.block.Block;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntityDispenser;
-import net.minecraft.util.ITickable;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tileentity.DispenserTileEntity;
+import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 
-public class TileEntityAutoDropper extends TileEntityDispenser implements ITickable {
+public class TileEntityAutoDropper extends DispenserTileEntity implements ITickableTileEntity {
 
 	private int ticksExpired = 0;
 	private int ticksMax = 4;
@@ -21,27 +21,27 @@ public class TileEntityAutoDropper extends TileEntityDispenser implements ITicka
 	@Override
 	public ITextComponent getName() {
 		ITextComponent itextcomponent = this.getCustomName();
-		return (ITextComponent) (itextcomponent != null ? itextcomponent : new TextComponentTranslation("block." + AutoDropper.MODID + ".auto_dropper"));
+		return (ITextComponent) (itextcomponent != null ? itextcomponent : new TranslationTextComponent("block." + AutoDropper.MODID + ".auto_dropper"));
 	}
 
-	@Override
-	public String getGuiID() {
-		return "minecraft:dropper";
-	}
+//	Removed in 1.14
+//	@Override
+//	public String getGuiID() {
+//		return "minecraft:dropper";
+//	}
 
 	@Override
-	public void read(NBTTagCompound nbt) {
+	public void read(CompoundNBT nbt) {
         super.read(nbt);
         this.ticksExpired = nbt.getInt("TicksExpired");
     }
 
 	@Override
-    public NBTTagCompound write(NBTTagCompound nbt) {
+    public CompoundNBT write(CompoundNBT nbt) {
         super.write(nbt);
-        nbt.setInt("TicksExpired", this.ticksExpired);
+        nbt.putInt("TicksExpired", this.ticksExpired);
         return nbt;
     }
-	    
 	      
 	@Override
 	public void tick() {

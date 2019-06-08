@@ -6,8 +6,8 @@ import org.apache.logging.log4j.Logger;
 import mods.autodropper.block.BlockAutoDropper;
 import mods.autodropper.tileentity.TileEntityAutoDropper;
 import net.minecraft.block.Block;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.event.RegistryEvent;
@@ -38,7 +38,7 @@ public class AutoDropper {
 		@SubscribeEvent
         public static void registerItems(RegistryEvent.Register<Item> event) {
 			IForgeRegistry<Item> registry = event.getRegistry();
-			registry.register(new ItemBlock(auto_dropper, new Item.Properties()
+			registry.register(new BlockItem(auto_dropper, new Item.Properties()
 					.group(ItemGroup.REDSTONE))
 					.setRegistryName("auto_dropper"));
 		}
@@ -46,7 +46,7 @@ public class AutoDropper {
 		@SuppressWarnings("unchecked")
 		@SubscribeEvent
 		public static void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event) {
-			event.getRegistry().register(tile_auto_dropper = (TileEntityType<TileEntityAutoDropper>) TileEntityType.Builder.create(TileEntityAutoDropper::new).build(null).setRegistryName("auto_dropper"));
+			event.getRegistry().register(tile_auto_dropper = (TileEntityType<TileEntityAutoDropper>) TileEntityType.Builder.func_223042_a(TileEntityAutoDropper::new, auto_dropper).build(null).setRegistryName("auto_dropper"));
 		}
 	}
 }
