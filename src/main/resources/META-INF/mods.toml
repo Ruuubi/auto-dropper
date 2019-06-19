@@ -25,7 +25,7 @@ authors="Ruuubi" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''Adds an automated version of Minecraft's Dropper'''
 
-[[dependencies.waterstrainer]]
+[[dependencies.autodropper]]
     modId="forge"
     mandatory=true
     versionRange="[26.0.33,)"
