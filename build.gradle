@@ -12,7 +12,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = "1.14.2-4.0.0"
+version = "1.14.2-4.0.1"
 group = "mods.autodropper"
 archivesBaseName = "AutoDropper"
 
@@ -25,38 +25,28 @@ minecraft {
 	runs {
         client {
 			if (file('../run').exists()) {
-				workingDirectory project.file('../run')
+				workingDirectory project.file('../run-client')
 			} else {
-				workingDirectory project.file('run')
+				workingDirectory project.file('run-client')
 			}
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
-            mods {
-                examplemod {
-                    source sourceSets.main
-                }
-            }
         }
 
         server {
             if (file('../run').exists()) {
-				workingDirectory project.file('../run')
+				workingDirectory project.file('../run-server')
 			} else {
-				workingDirectory project.file('run')
+				workingDirectory project.file('run-server')
 			}
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
-            mods {
-                examplemod {
-                    source sourceSets.main
-                }
-            }
         }
     }
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.14.2-26.0.8'
+    minecraft 'net.minecraftforge:forge:1.14.2-26.0.33'
 	compile fileTree(dir: 'libs', includes: ['*.jar'])
 }
 
