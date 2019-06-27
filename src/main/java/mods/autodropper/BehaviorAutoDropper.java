@@ -33,15 +33,15 @@ public class BehaviorAutoDropper implements IDispenseItemBehavior {
 	      if (facing == Direction.DOWN) {
 	    	  ItemEntity entityitem = new ItemEntity(world, x, y -0.2, z, stack);
 	    	  entityitem.setMotion(0, 0, 0);
-	        	world.func_217376_c(entityitem); //world.spawnEntity
+	        	world.addEntity(entityitem); //world.spawnEntity
 	        } else if (facing == Direction.UP) {
 	        	ItemEntity entityitem = new ItemEntity(world, x, y + 0.05, z, stack);
 	        	entityitem.setMotion((double)facing.getXOffset() * 0.3D, 0, (double)facing.getZOffset() * 0.3D);
-	        	world.func_217376_c(entityitem); //world.spawnEntity
+	        	world.addEntity(entityitem); //world.spawnEntity
 	        } else {
 	        	ItemEntity entityitem = new ItemEntity(world, x, y - 0.1, z, stack);
 	        	entityitem.setMotion((double)facing.getXOffset() * 0.3D, 0.2F, (double)facing.getZOffset() * 0.3D);
-		        world.func_217376_c(entityitem); //world.spawnEntity
+		        world.addEntity(entityitem); //world.spawnEntity
 	        }
 	   }
 

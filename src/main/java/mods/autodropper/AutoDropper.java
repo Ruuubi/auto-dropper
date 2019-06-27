@@ -46,7 +46,7 @@ public class AutoDropper {
 		@SuppressWarnings("unchecked")
 		@SubscribeEvent
 		public static void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event) {
-			event.getRegistry().register(tile_auto_dropper = (TileEntityType<TileEntityAutoDropper>) TileEntityType.Builder.func_223042_a(TileEntityAutoDropper::new, auto_dropper).build(null).setRegistryName("auto_dropper"));
+			event.getRegistry().register(tile_auto_dropper = (TileEntityType<TileEntityAutoDropper>) TileEntityType.Builder.create(TileEntityAutoDropper::new, auto_dropper).build(null).setRegistryName("auto_dropper"));
 		}
 	}
 }
