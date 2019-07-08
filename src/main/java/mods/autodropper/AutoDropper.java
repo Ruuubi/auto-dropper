@@ -21,28 +21,26 @@ public class AutoDropper {
 	public static final String MODNAME = "Auto Dropper";
 	public static final String MODNAME_NOSPACE = "AutoDropper";
 	public static final Logger LOGGER = LogManager.getLogger();
-	
+
 	public static BlockAutoDropper auto_dropper;
 	public static TileEntityType<TileEntityAutoDropper> tile_auto_dropper;
 
 	public AutoDropper() {}
-	
+
 	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 	public static class RegistryEvents {
 		@SubscribeEvent
-        public static void registerBlocks(RegistryEvent.Register<Block> event) {
+		public static void registerBlocks(RegistryEvent.Register<Block> event) {
 			IForgeRegistry<Block> registry = event.getRegistry();
 			registry.register(auto_dropper = new BlockAutoDropper());
 		}
-		
+
 		@SubscribeEvent
-        public static void registerItems(RegistryEvent.Register<Item> event) {
+		public static void registerItems(RegistryEvent.Register<Item> event) {
 			IForgeRegistry<Item> registry = event.getRegistry();
-			registry.register(new BlockItem(auto_dropper, new Item.Properties()
-					.group(ItemGroup.REDSTONE))
-					.setRegistryName("auto_dropper"));
+			registry.register(new BlockItem(auto_dropper, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("auto_dropper"));
 		}
-		
+
 		@SuppressWarnings("unchecked")
 		@SubscribeEvent
 		public static void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event) {

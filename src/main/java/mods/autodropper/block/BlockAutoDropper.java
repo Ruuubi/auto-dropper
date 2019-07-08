@@ -23,20 +23,21 @@ import net.minecraftforge.items.VanillaInventoryCodeHooks;
 
 public class BlockAutoDropper extends DropperBlock {
 	private static final IDispenseItemBehavior DISPENSE_BEHAVIOR = new BehaviorAutoDropper();
-	
+
 	public BlockAutoDropper() {
 		super(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.5F));
 		this.setRegistryName("auto_dropper");
 	}
-	
+
 	@Override
 	public TileEntity createNewTileEntity(IBlockReader world) {
 		return new TileEntityAutoDropper();
 	}
-		
+
 	@Override
-	public void tick(BlockState state, World world, BlockPos pos, Random random) {}
-	
+	public void tick(BlockState state, World world, BlockPos pos, Random random) {
+	}
+
 	@Override
 	public void dispense(World world, BlockPos pos) {
 		ProxyBlockSource blocksourceimpl = new ProxyBlockSource(world, pos);
@@ -63,5 +64,5 @@ public class BlockAutoDropper extends DropperBlock {
 			}
 		}
 	}
-		
+
 }

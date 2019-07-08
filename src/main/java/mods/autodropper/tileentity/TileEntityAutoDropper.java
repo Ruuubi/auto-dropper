@@ -13,36 +13,30 @@ public class TileEntityAutoDropper extends DispenserTileEntity implements ITicka
 
 	private int ticksExpired = 0;
 	private int ticksMax = 4;
-	
+
 	public TileEntityAutoDropper() {
 		super(AutoDropper.tile_auto_dropper);
 	}
-	
+
 	@Override
 	public ITextComponent getName() {
 		ITextComponent itextcomponent = this.getCustomName();
 		return (ITextComponent) (itextcomponent != null ? itextcomponent : new TranslationTextComponent("block." + AutoDropper.MODID + ".auto_dropper"));
 	}
 
-//	Removed in 1.14
-//	@Override
-//	public String getGuiID() {
-//		return "minecraft:dropper";
-//	}
-
 	@Override
 	public void read(CompoundNBT nbt) {
-        super.read(nbt);
-        this.ticksExpired = nbt.getInt("TicksExpired");
-    }
+		super.read(nbt);
+		this.ticksExpired = nbt.getInt("TicksExpired");
+	}
 
 	@Override
-    public CompoundNBT write(CompoundNBT nbt) {
-        super.write(nbt);
-        nbt.putInt("TicksExpired", this.ticksExpired);
-        return nbt;
-    }
-	      
+	public CompoundNBT write(CompoundNBT nbt) {
+		super.write(nbt);
+		nbt.putInt("TicksExpired", this.ticksExpired);
+		return nbt;
+	}
+
 	@Override
 	public void tick() {
 		if (!world.isRemote) {
@@ -59,6 +53,6 @@ public class TileEntityAutoDropper extends DispenserTileEntity implements ITicka
 				this.ticksExpired += 1;
 			}
 		}
-	}	
-	
+	}
+
 }
