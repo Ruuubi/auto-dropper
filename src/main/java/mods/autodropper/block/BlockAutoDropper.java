@@ -19,6 +19,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.items.VanillaInventoryCodeHooks;
 
 public class BlockAutoDropper extends DropperBlock {
@@ -35,7 +36,8 @@ public class BlockAutoDropper extends DropperBlock {
 	}
 
 	@Override
-	public void tick(BlockState state, World world, BlockPos pos, Random random) {
+	// Pre 1.15: public void tick(BlockState state, ServerWorld world, BlockPos pos, Random random) {}
+	public void func_225534_a_(BlockState state, ServerWorld world, BlockPos pos, Random random) {
 	}
 
 	@Override
