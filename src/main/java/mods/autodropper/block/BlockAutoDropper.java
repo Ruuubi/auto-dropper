@@ -18,7 +18,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.items.VanillaInventoryCodeHooks;
 
@@ -36,12 +35,10 @@ public class BlockAutoDropper extends DropperBlock {
 	}
 
 	@Override
-	// Pre 1.15: public void tick(BlockState state, ServerWorld world, BlockPos pos, Random random) {}
-	public void func_225534_a_(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-	}
+	public void tick(BlockState state, ServerWorld world, BlockPos pos, Random random) {}
 
 	@Override
-	public void dispense(World world, BlockPos pos) {
+	public void dispense(ServerWorld world, BlockPos pos) {
 		ProxyBlockSource blocksourceimpl = new ProxyBlockSource(world, pos);
 		DispenserTileEntity tileDispenser = blocksourceimpl.getBlockTileEntity();
 		int i = tileDispenser.getDispenseSlot();
