@@ -32,10 +32,8 @@ public class TileEntityAutoDropper extends DispenserBlockEntity {
 	}
 
 	@Override
-	public CompoundTag save(CompoundTag nbt) {
-		super.save(nbt);
+	protected void saveAdditional(CompoundTag nbt) {
 		nbt.putInt("TicksExpired", this.ticksExpired);
-		return nbt;
 	}
 
 	public void serverTick() {
