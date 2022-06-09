@@ -10,10 +10,12 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 @Mod("autodropper")
 public class AutoDropper {
@@ -22,29 +24,23 @@ public class AutoDropper {
 	public static final String MODNAME_NOSPACE = "AutoDropper";
 	public static final Logger LOGGER = LogManager.getLogger();
 
-	public static BlockAutoDropper auto_dropper;
-	public static BlockEntityType<TileEntityAutoDropper> tile_auto_dropper;
+	// Blocks
+	private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
+	public static final RegistryObject<Block> BLOCK_AUTO_DROPPER = BLOCKS.register("auto_dropper", () -> new BlockAutoDropper());
 
-	public AutoDropper() {}
+	// Items
+	private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
+	public static final RegistryObject<Item> ITEM_AUTO_DROPPER = ITEMS.register("auto_dropper", () -> new BlockItem(BLOCK_AUTO_DROPPER.get(), new Item.Properties().tab(CreativeModeTab.TAB_REDSTONE)));
 
-	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-	public static class RegistryEvents {
-		@SubscribeEvent
-		public static void registerBlocks(RegistryEvent.Register<Block> event) {
-			IForgeRegistry<Block> registry = event.getRegistry();
-			registry.register(auto_dropper = new BlockAutoDropper());
-		}
+	// Block Entities
+	private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, MODID);
+	public static final RegistryObject<BlockEntityType<TileEntityAutoDropper>> TILE_AUTO_DROPPER = BLOCK_ENTITIES.register("tile_auto_dropper", () -> BlockEntityType.Builder.of(TileEntityAutoDropper::new, BLOCK_AUTO_DROPPER.get()).build(null));
 
-		@SubscribeEvent
-		public static void registerItems(RegistryEvent.Register<Item> event) {
-			IForgeRegistry<Item> registry = event.getRegistry();
-			registry.register(new BlockItem(auto_dropper, new Item.Properties().tab(CreativeModeTab.TAB_REDSTONE)).setRegistryName("auto_dropper"));
-		}
-
-		@SuppressWarnings("unchecked")
-		@SubscribeEvent
-		public static void registerTileEntities(RegistryEvent.Register<BlockEntityType<?>> event) {
-			event.getRegistry().register(tile_auto_dropper = (BlockEntityType<TileEntityAutoDropper>) BlockEntityType.Builder.of(TileEntityAutoDropper::new, auto_dropper).build(null).setRegistryName("auto_dropper"));
-		}
+	public AutoDropper() {
+		IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+		BLOCKS.register(modEventBus);
+		ITEMS.register(modEventBus);
+		BLOCK_ENTITIES.register(modEventBus);
 	}
+
 }

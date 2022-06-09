@@ -1,7 +1,5 @@
 package mods.autodropper.block;
 
-import java.util.Random;
-
 import javax.annotation.Nullable;
 
 import mods.autodropper.BehaviorAutoDropper;
@@ -11,6 +9,7 @@ import net.minecraft.core.BlockSourceImpl;
 import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -30,7 +29,6 @@ public class BlockAutoDropper extends DropperBlock {
 
 	public BlockAutoDropper() {
 		super(Block.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.5F));
-		this.setRegistryName("auto_dropper");
 	}
 
 	@Override
@@ -44,7 +42,7 @@ public class BlockAutoDropper extends DropperBlock {
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel level, BlockPos pos, Random rand) {}
+	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {}
 
 	@Nullable
 	@Override
@@ -63,7 +61,7 @@ public class BlockAutoDropper extends DropperBlock {
 	public void dispenseFrom(ServerLevel level, BlockPos pos) {
 		BlockSourceImpl blocksourceimpl = new BlockSourceImpl(level, pos);
 		DispenserBlockEntity tileDispenser = blocksourceimpl.getEntity();
-		int i = tileDispenser.getRandomSlot();
+		int i = tileDispenser.getRandomSlot(level.random);
 		if (i >= 0) {
 			ItemStack randStack = tileDispenser.getItem(i);
 			if (!randStack.isEmpty() && VanillaInventoryCodeHooks.dropperInsertHook(level, pos, tileDispenser, i, randStack)) {

@@ -1,11 +1,11 @@
 modLoader="javafml"
-loaderVersion="[38,)"
+loaderVersion="[41,)"
 issueTrackerURL="https://minecraft.curseforge.com/projects/auto-dropper/issues"
 license="All rights reserved"
 
 [[mods]]
 modId="autodropper"
-version="1.18-9.0.0"
+version="1.19-10.0.0"
 displayName="Auto Dropper"
 # updateJSONURL=""
 displayURL="https://minecraft.curseforge.com/projects/auto-dropper"
@@ -17,6 +17,6 @@ description='''Adds an automated version of Minecraft's Dropper'''
 [[dependencies.autodropper]]
     modId="forge"
     mandatory=true
-    versionRange="[38.0.4,)"
+    versionRange="[41.0.4,)"
     ordering="NONE"
 	side="BOTH"

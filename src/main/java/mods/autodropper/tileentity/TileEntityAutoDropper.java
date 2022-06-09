@@ -5,7 +5,6 @@ import mods.autodropper.block.BlockAutoDropper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.DispenserBlockEntity;
@@ -17,12 +16,12 @@ public class TileEntityAutoDropper extends DispenserBlockEntity {
 	private int ticksMax = 4;
 
 	public TileEntityAutoDropper(BlockPos pos, BlockState state) {
-		super(AutoDropper.tile_auto_dropper, pos, state);
+		super(AutoDropper.TILE_AUTO_DROPPER.get(), pos, state);
 	}
 
 	@Override
 	public Component getDisplayName() {
-		return new TranslatableComponent("block." + AutoDropper.MODID + ".auto_dropper");
+		return Component.translatable("block." + AutoDropper.MODID + ".auto_dropper");
 	}
 
 	@Override
