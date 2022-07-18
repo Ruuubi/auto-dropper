@@ -33,7 +33,7 @@ public class AutoDropper {
 	public static final RegistryObject<Item> ITEM_AUTO_DROPPER = ITEMS.register("auto_dropper", () -> new BlockItem(BLOCK_AUTO_DROPPER.get(), new Item.Properties().tab(CreativeModeTab.TAB_REDSTONE)));
 
 	// Block Entities
-	private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, MODID);
+	private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MODID);
 	public static final RegistryObject<BlockEntityType<TileEntityAutoDropper>> TILE_AUTO_DROPPER = BLOCK_ENTITIES.register("tile_auto_dropper", () -> BlockEntityType.Builder.of(TileEntityAutoDropper::new, BLOCK_AUTO_DROPPER.get()).build(null));
 
 	public AutoDropper() {
