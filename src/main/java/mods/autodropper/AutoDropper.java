@@ -6,10 +6,11 @@ import org.apache.logging.log4j.Logger;
 import mods.autodropper.block.BlockAutoDropper;
 import mods.autodropper.tileentity.TileEntityAutoDropper;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -30,8 +31,15 @@ public class AutoDropper {
 
 	// Items
 	private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
-	public static final RegistryObject<Item> ITEM_AUTO_DROPPER = ITEMS.register("auto_dropper", () -> new BlockItem(BLOCK_AUTO_DROPPER.get(), new Item.Properties().tab(CreativeModeTab.TAB_REDSTONE)));
-
+	public static final RegistryObject<Item> ITEM_AUTO_DROPPER = ITEMS.register("auto_dropper", () -> new BlockItem(BLOCK_AUTO_DROPPER.get(), new Item.Properties()));
+	
+	private void setCreativeTab(CreativeModeTabEvent.BuildContents event) {
+		if (event.getTab() == CreativeModeTabs.REDSTONE_BLOCKS) {
+			System.out.println("TRIGGERED");
+			event.accept(ITEM_AUTO_DROPPER);
+		  }
+	}
+	
 	// Block Entities
 	private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MODID);
 	public static final RegistryObject<BlockEntityType<TileEntityAutoDropper>> TILE_AUTO_DROPPER = BLOCK_ENTITIES.register("tile_auto_dropper", () -> BlockEntityType.Builder.of(TileEntityAutoDropper::new, BLOCK_AUTO_DROPPER.get()).build(null));
@@ -41,6 +49,7 @@ public class AutoDropper {
 		BLOCKS.register(modEventBus);
 		ITEMS.register(modEventBus);
 		BLOCK_ENTITIES.register(modEventBus);
+		modEventBus.addListener(this::setCreativeTab);
 	}
 
 }
