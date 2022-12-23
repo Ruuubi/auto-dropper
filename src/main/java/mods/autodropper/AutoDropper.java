@@ -35,7 +35,6 @@ public class AutoDropper {
 	
 	private void setCreativeTab(CreativeModeTabEvent.BuildContents event) {
 		if (event.getTab() == CreativeModeTabs.REDSTONE_BLOCKS) {
-			System.out.println("TRIGGERED");
 			event.accept(ITEM_AUTO_DROPPER);
 		  }
 	}
