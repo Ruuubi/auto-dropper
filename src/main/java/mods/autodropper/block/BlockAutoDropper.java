@@ -21,14 +21,13 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.DispenserBlockEntity;
 import net.minecraft.world.level.block.entity.HopperBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraftforge.items.VanillaInventoryCodeHooks;
 
 public class BlockAutoDropper extends DropperBlock {
 	private static final DispenseItemBehavior AUTO_DROPPER_DISPENSE_BEHAVIOR = new BehaviorAutoDropper();
 
 	public BlockAutoDropper() {
-		super(Block.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.5F));
+		super(Block.Properties.of().requiresCorrectToolForDrops().strength(3.5F));
 	}
 
 	@Override

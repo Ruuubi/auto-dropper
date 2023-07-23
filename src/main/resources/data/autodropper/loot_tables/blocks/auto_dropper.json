@@ -2,19 +2,25 @@
   "type": "minecraft:block",
   "pools": [
     {
-	  "name": "whydoineedthisjsonshitforeverythingnow",
-      "rolls": 1,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "autodropper:auto_dropper"
-        }
-      ],
+      "bonus_rolls": 0.0,
       "conditions": [
         {
           "condition": "minecraft:survives_explosion"
         }
-      ]
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:copy_name",
+              "source": "block_entity"
+            }
+          ],
+          "name": "autodropper:auto_dropper"
+        }
+      ],
+      "rolls": 1.0
     }
   ]
 }

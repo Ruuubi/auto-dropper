@@ -1,5 +1,6 @@
 package mods.autodropper;
 
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,7 +11,6 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -27,14 +27,14 @@ public class AutoDropper {
 
 	// Blocks
 	private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
-	public static final RegistryObject<Block> BLOCK_AUTO_DROPPER = BLOCKS.register("auto_dropper", () -> new BlockAutoDropper());
+	public static final RegistryObject<Block> BLOCK_AUTO_DROPPER = BLOCKS.register("auto_dropper", BlockAutoDropper::new);
 
 	// Items
 	private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
 	public static final RegistryObject<Item> ITEM_AUTO_DROPPER = ITEMS.register("auto_dropper", () -> new BlockItem(BLOCK_AUTO_DROPPER.get(), new Item.Properties()));
 	
-	private void setCreativeTab(CreativeModeTabEvent.BuildContents event) {
-		if (event.getTab() == CreativeModeTabs.REDSTONE_BLOCKS) {
+	private void setCreativeTab(BuildCreativeModeTabContentsEvent event) {
+		if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS) {
 			event.accept(ITEM_AUTO_DROPPER);
 		  }
 	}
